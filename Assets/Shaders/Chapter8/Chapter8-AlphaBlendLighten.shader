@@ -1,6 +1,4 @@
-﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
-
-Shader "Unity Shaders Book/Chapter 8/Alpha Blending"
+﻿Shader "Unity Shaders Book/Chapter 8/Alpha Blending Lighten"
 {
 	Properties
 	{
@@ -22,7 +20,8 @@ Shader "Unity Shaders Book/Chapter 8/Alpha Blending"
 			Tags { "LightMode"="ForwardBase" }
 
 			ZWrite Off
-			Blend SrcAlpha OneMinusSrcAlpha
+			BlendOp Max
+			Blend One One
 
 			CGPROGRAM
 

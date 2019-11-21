@@ -1,6 +1,6 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
-Shader "Unity Shaders Book/Chapter 8/Alpha Blending"
+Shader "Unity Shaders Book/Chapter 8/Alpha Blending ZWrite"
 {
 	Properties
 	{
@@ -15,6 +15,13 @@ Shader "Unity Shaders Book/Chapter 8/Alpha Blending"
 			"Queue"="Transparent"
 			"IgnoreProjector"="True"
 			"RenderType"="Transparent"
+		}
+
+		// Extra pass that renders to depth buffer only
+		Pass
+		{
+			ZWrite On
+			ColorMask 0
 		}
 
 		Pass
@@ -79,5 +86,5 @@ Shader "Unity Shaders Book/Chapter 8/Alpha Blending"
 			ENDCG
 		}
 	}
-	Fallback "Transparent/VertexLit"
+	Fallback "Diffuse"
 }
