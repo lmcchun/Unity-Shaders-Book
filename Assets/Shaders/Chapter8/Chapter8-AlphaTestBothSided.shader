@@ -1,6 +1,6 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
-Shader "Unity Shaders Book/Chapter 8/Alpha Test"
+Shader "Unity Shaders Book/Chapter 8/Alpha Test Both Sided"
 {
 	Properties
 	{
@@ -20,6 +20,9 @@ Shader "Unity Shaders Book/Chapter 8/Alpha Test"
 		Pass
 		{
 			Tags { "LightMode"="ForwardBase" }
+
+			// Turn off culling
+			Cull Off
 
 			CGPROGRAM
 
