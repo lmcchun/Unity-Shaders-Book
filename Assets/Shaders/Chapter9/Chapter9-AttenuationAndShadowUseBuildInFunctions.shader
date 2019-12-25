@@ -1,6 +1,6 @@
 ﻿// Upgrade NOTE: replaced '_LightMatrix0' with 'unity_WorldToLight'
 
-Shader "Unity Shaders Book/Chapter 9/Shadow"
+Shader "Unity Shaders Book/Chapter 9/Attenuation And Shadow Use Build-in Functions"
 {
 	Properties
 	{
@@ -25,6 +25,7 @@ Shader "Unity Shaders Book/Chapter 9/Shadow"
 			#pragma vertex vert
 			#pragma fragment frag
 
+			// Need these files to get built-in macros
 			#include "Lighting.cginc"
 			#include "AutoLight.cginc"
 
@@ -87,13 +88,10 @@ Shader "Unity Shaders Book/Chapter 9/Shadow"
 				// Compute specular term
 				fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(max(0, dot(worldNormal, halfDir)), _Gloss);
 
-				// The attenuation of directional light is always 1
-				fixed atten = 1.0;
+				// UNITY_LIGHT_ATTENUATION not only compute attenuation, but also shadow infos
+				UNITY_LIGHT_ATTENUATION(atten, i, i.worldPos);
 
-				// Use shadow coordinates to sample shadow map
-				fixed shadow = SHADOW_ATTENUATION(i);
-
-				return fixed4(ambient + (diffuse + specular) * atten * shadow, 1.0);
+				return fixed4(ambient + (diffuse + specular) * atten, 1.0);
 			}
 			ENDCG
 		}
@@ -164,19 +162,8 @@ Shader "Unity Shaders Book/Chapter 9/Shadow"
 				fixed3 halfDir = normalize(worldLightDir + viewDir);
 				fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(max(0, dot(worldNormal, halfDir)), _Gloss);
 
-#ifdef USING_DIRECTIONAL_LIGHT
-				fixed atten = 1.0;
-#elif defined (POINT)
-				float3 lightCoord = mul(unity_WorldToLight, float4(i.worldPos, 1)).xyz;
-				fixed atten = tex2D(_LightTexture0, dot(lightCoord, lightCoord).rr).UNITY_ATTEN_CHANNEL;
-#elif defined (SPOT)
-				float4 lightCoord = mul(unity_WorldToLight, float4(i.worldPos, 1));
-				fixed atten = (lightCoord.z > 0)
-							* tex2D(_LightTexture0, lightCoord.xy / lightCoord.w + 0.5).w
-							* tex2D(_LightTextureB0, dot(lightCoord, lightCoord).rr).UNITY_ATTEN_CHANNEL;
-#else
-				fixed atten = 1.0;
-#endif
+				// UNITY_LIGHT_ATTENUATION not only compute attenuation, but also shadow infos
+				UNITY_LIGHT_ATTENUATION(atten, i, i.worldPos);
 
 				return fixed4((diffuse + specular) * atten, 1.0);
 			}
