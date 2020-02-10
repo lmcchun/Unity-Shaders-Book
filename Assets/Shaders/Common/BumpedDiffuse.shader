@@ -100,7 +100,8 @@ Shader "Unity Shaders Book/Common/Bumped Diffuse"
 			ENDCG
 		}
 
-		Pass { 
+		Pass
+		{ 
 			Tags { "LightMode"="ForwardAdd" }
 
 			Blend One One
