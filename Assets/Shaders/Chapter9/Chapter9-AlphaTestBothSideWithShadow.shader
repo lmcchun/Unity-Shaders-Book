@@ -26,6 +26,8 @@ Shader "Unity Shaders Book/Chapter 9/Alpha Test Both Sided With Shadow"
 
 			CGPROGRAM
 
+			#pragma multi_compile_fwdbase
+
 			#pragma vertex vert
 			#pragma fragment frag
 
@@ -61,7 +63,7 @@ Shader "Unity Shaders Book/Chapter 9/Alpha Test Both Sided With Shadow"
 				o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
 				o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
 
-				// Pass shadow coordinates to pixel shade
+				// Pass shadow coordinates to pixel shader
 				TRANSFER_SHADOW(o);
 
 				return o;

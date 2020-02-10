@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: AlphaTestWithShadowMat
-  m_Shader: {fileID: 4800000, guid: 09e9ffdf0373a964293160ad03cf76ed, type: 3}
+  m_Name: AlphaBlendWithShadowMat
+  m_Shader: {fileID: 4800000, guid: 1eb90041bc791da47bf4ea4094828a2e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -55,8 +55,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaScale: 1
     - _BumpScale: 1
-    - _Cutoff: 0.6
+    - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1

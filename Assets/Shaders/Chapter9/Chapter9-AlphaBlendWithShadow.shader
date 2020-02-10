@@ -1,27 +1,32 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "Unity Shaders Book/Chapter 9/Alpha Test With Shadow"
-{
+Shader "Unity Shaders Book/Chapter 9/Alpha Blend With Shadow" {
 	Properties
 	{
-		_Color ("Main Tint", Color) = (1, 1, 1, 1)
-		_MainTex ("Texture", 2D) = "white" {}
-		_Cutoff ("Alpha Cutoff", Range(0, 1)) = 0.5
+		_Color ("Color Tint", Color) = (1, 1, 1, 1)
+		_MainTex ("Main Tex", 2D) = "white" {}
+		_AlphaScale ("Alpha Scale", Range(0, 1)) = 1
 	}
 	SubShader
 	{
 		Tags
 		{
-			"Queue"="AlphaTest"
+			"Queue"="Transparent"
 			"IgnoreProjector"="True"
-			"RenderType"="TransparentCutout"
+			"RenderType"="Transparent"
 		}
 
 		Pass
 		{
 			Tags { "LightMode"="ForwardBase" }
 
+			ZWrite Off
+			Blend SrcAlpha OneMinusSrcAlpha
+
 			CGPROGRAM
+
+			#pragma multi_compile_fwdbase
 
 			#pragma vertex vert
 			#pragma fragment frag
@@ -32,7 +37,7 @@ Shader "Unity Shaders Book/Chapter 9/Alpha Test With Shadow"
 			fixed4 _Color;
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
-			fixed _Cutoff;
+			fixed _AlphaScale;
 
 			struct a2v
 			{
@@ -49,21 +54,21 @@ Shader "Unity Shaders Book/Chapter 9/Alpha Test With Shadow"
 				float2 uv : TEXCOORD2;
 				SHADOW_COORDS(3)
 			};
-			
+
 			v2f vert(a2v v)
 			{
-				v2f o;
-				o.pos = UnityObjectToClipPos(v.vertex);
-				o.worldNormal = UnityObjectToWorldNormal(v.normal);
-				o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
-				o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
+			 	v2f o;
+			 	o.pos = UnityObjectToClipPos(v.vertex);
+			 	o.worldNormal = UnityObjectToWorldNormal(v.normal);
+			 	o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
+			 	o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
 
-				// Pass shadow coordinates to pixel shader
-				TRANSFER_SHADOW(o);
+			 	// Pass shadow coordinates to pixel shader
+			 	TRANSFER_SHADOW(o);
 
-				return o;
+			 	return o;
 			}
-			
+
 			fixed4 frag(v2f i) : SV_Target
 			{
 				fixed3 worldNormal = normalize(i.worldNormal);
@@ -71,27 +76,22 @@ Shader "Unity Shaders Book/Chapter 9/Alpha Test With Shadow"
 
 				fixed4 texColor = tex2D(_MainTex, i.uv);
 
-				// Alpha test
-				//clip(texColor.a - _Cutoff);
-				// Equal to
-				if ((texColor.a - _Cutoff) < 0.0)
-				{
-					discard;
-				}
-
 				fixed3 albedo = texColor.rgb * _Color.rgb;
 
 				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * albedo;
 
 				fixed3 diffuse = _LightColor0.rgb * albedo * max(0, dot(worldNormal, worldLightDir));
 
-				// UNITY_LIGHT_ATTENUATION not only compute attenuation, but also shadow infos
+			 	// UNITY_LIGHT_ATTENUATION not only compute attenuation, but also shadow infos
 				UNITY_LIGHT_ATTENUATION(atten, i, i.worldPos);
 
-				return fixed4(ambient + diffuse * atten, 1.0);
+				return fixed4(ambient + diffuse * atten, texColor.a * _AlphaScale);
 			}
+			
 			ENDCG
 		}
-	}
-	Fallback "Transparent/Cutout/VertexLit"
+	} 
+	//FallBack "Transparent/VertexLit"
+	// Or  force to apply shadow
+	FallBack "VertexLit"
 }
