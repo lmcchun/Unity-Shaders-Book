@@ -1,6 +1,9 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
+// 在片段着色器中计算光源方向和观察方向.
+// 跟 Chapter10-Reflection.shader 对比,
+// 在表面不平滑的位置, 渲染的结果差别比较大.
 Shader "Unity Shaders Book/Chapter 10/My Reflection"
 {
 	Properties

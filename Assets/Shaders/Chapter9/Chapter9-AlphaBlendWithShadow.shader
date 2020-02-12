@@ -1,6 +1,8 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
+// 在 2017.4.35f1 上测试, 使用这个着色器的物体没有接收阴影.
+// 使用 GitHub 上的代码, 在 5.3.1f1 上测试也没有接收阴影.
 Shader "Unity Shaders Book/Chapter 9/Alpha Blend With Shadow"
 {
 	Properties
