@@ -1,4 +1,6 @@
 .vs/
 Library/
 Temp/
-UnityShadersBook.sln
+obj/
+*.csproj
+*.sln
