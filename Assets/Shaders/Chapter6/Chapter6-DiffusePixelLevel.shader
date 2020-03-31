@@ -40,8 +40,8 @@ Shader "Unity Shaders Book/Chapter 6/Diffuse Pixel-Level"
 				// Transform the vertex from object space to projection space
 				o.pos = UnityObjectToClipPos(v.vertex);
 
-                // Transform the normal from object space to world space
-                o.worldNormal = mul(v.normal, (float3x3)unity_WorldToObject);
+				// Transform the normal from object space to world space
+				o.worldNormal = mul(v.normal, (float3x3)unity_WorldToObject);
 
 				return o;
 			}
@@ -61,7 +61,7 @@ Shader "Unity Shaders Book/Chapter 6/Diffuse Pixel-Level"
 
 				fixed3 color = ambient + diffuse;
 
-                return fixed4(color, 1.0);
+				return fixed4(color, 1.0);
 			}
 			ENDCG
 		}
