@@ -49,7 +49,7 @@
 			float _VerticalAmount;
 			float _Speed;
 			
-			v2f vert (a2v v)
+			v2f vert(a2v v)
 			{
 				v2f o;
 				o.pos = UnityObjectToClipPos(v.vertex);
@@ -57,7 +57,7 @@
 				return o;
 			}
 			
-			fixed4 frag (v2f i) : SV_Target
+			fixed4 frag(v2f i) : SV_Target
 			{
 				float time = floor(_Time.y * _Speed);
 				float row = floor(time / _HorizontalAmount);
