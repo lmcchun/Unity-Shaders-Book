@@ -5,10 +5,10 @@ Shader "Unity Shaders Book/Chapter 10/Reflection"
 {
 	Properties
 	{
-		_Color("Color Tint", Color) = (1, 1, 1, 1)
-		_ReflectColor("Reflection Color", Color) = (1, 1, 1, 1)
-		_ReflectAmount("Relfect Amount", Range(0, 1)) = 1
-		_Cubemap("Reflection Cubemap", Cube) = "_Skybox" {}
+		_Color ("Color Tint", Color) = (1, 1, 1, 1)
+		_ReflectColor ("Reflection Color", Color) = (1, 1, 1, 1)
+		_ReflectAmount ("Relfect Amount", Range(0, 1)) = 1
+		_Cubemap ("Reflection Cubemap", Cube) = "_Skybox" {}
 	}
 	SubShader
 	{
@@ -53,7 +53,7 @@ Shader "Unity Shaders Book/Chapter 10/Reflection"
 				SHADOW_COORDS(4)
 			};
 			
-			v2f vert (a2v v)
+			v2f vert(a2v v)
 			{
 				v2f o;
 				o.pos = UnityObjectToClipPos(v.vertex);
@@ -69,7 +69,7 @@ Shader "Unity Shaders Book/Chapter 10/Reflection"
 				return o;
 			}
 			
-			fixed4 frag (v2f i) : SV_Target
+			fixed4 frag(v2f i) : SV_Target
 			{
 				fixed3 worldNormal = normalize(i.worldNormal);
 				fixed3 worldLightDir = normalize(UnityWorldSpaceLightDir(i.worldPos));

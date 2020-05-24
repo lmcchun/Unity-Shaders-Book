@@ -6,9 +6,9 @@ Shader "Unity Shaders Book/Chapter 6/Blinn-Phong"
 {
 	Properties
 	{
-		_Diffuse("Diffuse", Color) = (1, 1, 1, 1)
-		_Specular("Specular", Color) = (1, 1, 1, 1)
-		_Gloss("Gloss", Range(8.0, 256)) = 20
+		_Diffuse ("Diffuse", Color) = (1, 1, 1, 1)
+		_Specular ("Specular", Color) = (1, 1, 1, 1)
+		_Gloss ("Gloss", Range(8.0, 256)) = 20
 	}
 	SubShader
 	{

@@ -5,7 +5,7 @@ Shader "Unity Shaders Book/Chapter 5/Simple Shader"
 	Properties
 	{
 		// 声明一个 Color 类型的属性
-		_Color("Color Tint", Color) = (1.0, 1.0, 1.0, 1.0)
+		_Color ("Color Tint", Color) = (1.0, 1.0, 1.0, 1.0)
 	}
 	SubShader
 	{

@@ -5,7 +5,7 @@ Shader "Unity Shaders Book/Chapter 6/Diffuse Pixel-Level"
 {
 	Properties
 	{
-		_Diffuse("Diffuse", Color) = (1, 1, 1, 1)
+		_Diffuse ("Diffuse", Color) = (1, 1, 1, 1)
 	}
 	SubShader
 	{

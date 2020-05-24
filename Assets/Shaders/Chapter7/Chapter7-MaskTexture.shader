@@ -52,7 +52,7 @@ Shader "Unity Shaders Book/Chapter 7/Mask Texture"
 				float3 viewDir : TEXCOORD2;
 			};
 			
-			v2f vert (a2v v)
+			v2f vert(a2v v)
 			{
 				v2f o;
 				o.pos = UnityObjectToClipPos(v.vertex);
@@ -66,7 +66,7 @@ Shader "Unity Shaders Book/Chapter 7/Mask Texture"
 				return o;
 			}
 			
-			fixed4 frag (v2f i) : SV_Target
+			fixed4 frag(v2f i) : SV_Target
 			{
 				fixed3 tangentLightDir = normalize(i.lightDir);
 				fixed3 tangentViewDir = normalize(i.viewDir);
