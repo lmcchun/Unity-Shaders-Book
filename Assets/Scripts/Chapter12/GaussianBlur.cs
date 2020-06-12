@@ -38,8 +38,10 @@ public class GaussianBlur : PostEffectsBase
         OnRenderImage3(src, dest);
     }
 
+#pragma warning disable IDE0051
     // 1st edition: just apply blur
     void OnRenderImage1(RenderTexture src, RenderTexture dest)
+#pragma warning restore IDE0051
     {
         if (Material != null)
         {
@@ -60,8 +62,10 @@ public class GaussianBlur : PostEffectsBase
         }
     }
 
+#pragma warning disable IDE0051
     // 2nd edition: scale the render texture
     void OnRenderImage2(RenderTexture src, RenderTexture dest)
+#pragma warning restore IDE0051
     {
         if (Material != null)
         {

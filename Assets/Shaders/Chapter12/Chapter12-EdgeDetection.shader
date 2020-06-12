@@ -2,7 +2,7 @@
 {
 	Properties
 	{
-		_MainTex ("Texture", 2D) = "white" {}
+		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_EdgeOnly ("Edge Only", Float) = 1.0
 		_EdgeColor ("Edge Color", Color) = (0, 0, 0, 1)
 		_BacgroundColor ("Bacground Color", Color) = (1, 1, 1, 1)
