@@ -2,7 +2,7 @@
 
 public class BrightnessSaturationAndContrast : PostEffectsBase
 {
-#pragma warning disable 0649
+#pragma warning disable 0649, IDE0044
     [SerializeField]
     private Shader briSatConShader;
 
@@ -14,7 +14,7 @@ public class BrightnessSaturationAndContrast : PostEffectsBase
 
     [SerializeField, Range(0.0f, 3.0f)]
     private float contrast = 1.0f;
-#pragma warning restore 0649
+#pragma warning restore 0649, IDE0044
 
     private Material briSatConMaterial;
 
@@ -27,7 +27,9 @@ public class BrightnessSaturationAndContrast : PostEffectsBase
         }
     }
 
+#pragma warning disable IDE0051
     void OnRenderImage(RenderTexture src, RenderTexture dest)
+#pragma warning restore IDE0051
     {
         if (Material != null)
         {
