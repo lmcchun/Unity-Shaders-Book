@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SetPropertyAttribute : PropertyAttribute
+public sealed class SetPropertyAttribute : PropertyAttribute
 {
     public string Name { get; private set; }
 
