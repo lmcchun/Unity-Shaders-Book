@@ -40,8 +40,8 @@
 		ENDCG
 
 		ZTest Always
-		Cull Off
-		ZWrite Off
+		Cull Off // ???
+		ZWrite Off // 不需要写入, 每个像素只会执行一次
 
 		Pass
 		{
