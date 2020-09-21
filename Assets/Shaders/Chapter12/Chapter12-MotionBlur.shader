@@ -55,6 +55,9 @@
 
 		Pass
 		{
+			// accumulationTexture 会被输出到屏幕上,
+			// 而上一个 Pass 无法得到正确的深度,
+			// 所以需要这个 Pass 来正确设置深度
 			Blend One Zero
 			ColorMask A
 			CGPROGRAM
