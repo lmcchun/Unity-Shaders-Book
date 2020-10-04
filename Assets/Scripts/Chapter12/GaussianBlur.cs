@@ -98,30 +98,24 @@ public class GaussianBlur : PostEffectsBase
             var buffer0 = RenderTexture.GetTemporary(rtW, rtH, 0);
             buffer0.filterMode = FilterMode.Bilinear;
 
+            var buffer1 = RenderTexture.GetTemporary(rtW, rtH, 0);
+            // ??? 是否需要设置 filterMode
+
             Graphics.Blit(src, buffer0);
 
             for (var i = 0; i < iterations; ++i)
             {
                 Material.SetFloat("_BlurSize", 1.0f + i * blurSpread);
 
-                var buffer1 = RenderTexture.GetTemporary(rtW, rtH, 0);
-
                 // Render the vertical pass
                 Graphics.Blit(buffer0, buffer1, Material, 0);
-
-                RenderTexture.ReleaseTemporary(buffer0);
-                buffer0 = buffer1;
-                buffer1 = RenderTexture.GetTemporary(rtW, rtH, 0);
-
                 // Render the horizontal pass
-                Graphics.Blit(buffer0, buffer1, Material, 1);
-
-                RenderTexture.ReleaseTemporary(buffer0);
-                buffer0 = buffer1;
+                Graphics.Blit(buffer1, buffer0, Material, 1);
             }
 
             Graphics.Blit(buffer0, dest);
             RenderTexture.ReleaseTemporary(buffer0);
+            RenderTexture.ReleaseTemporary(buffer1);
         }
         else
         {
