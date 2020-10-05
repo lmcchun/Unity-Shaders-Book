@@ -48,7 +48,7 @@ Shader "Unity Shaders Book/Chapter 14/Toon Shading"
 				float4 pos : SV_POSITION;
 			};
 
-			v2f vert (a2v v)
+			v2f vert(a2v v)
 			{
 				v2f o;
 				float4 pos = mul(UNITY_MATRIX_MV, v.vertex);
@@ -59,7 +59,7 @@ Shader "Unity Shaders Book/Chapter 14/Toon Shading"
 				return o;
 			}
 			
-			fixed4 frag (v2f i) : SV_Target
+			fixed4 frag(v2f i) : SV_Target
 			{
 				return float4(_OutlineColor.rgb, 1);
 			}
